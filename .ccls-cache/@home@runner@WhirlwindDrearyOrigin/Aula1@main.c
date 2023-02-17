@@ -55,7 +55,6 @@ int contarNos(Celula *topo) {
 void exibir(Celula *topo) {
   if (!topo) {
     printf("Pilha vazia\n");
-    return;
   }
   Celula *p;
   for (p = topo; p; p = p->prox) {
@@ -65,43 +64,45 @@ void exibir(Celula *topo) {
 
 int localizado(int valor, Celula *topo) {
   Celula *p;
-  if (!topo)
-    return 0; // pilha vazia, logo valor nao encontrado
-
+  int qtd = 0;
+  if (!topo) {
+    printf("Pilha vazia\n");
+    return 0;
+  }
   for (p = topo; p; p = p->prox) {
-    if (valor == p->dado)
 
-      return 1;
+    if (valor == p->dado) {
+      printf("%d\t\n", p->dado);
+      ++qtd;
+      if (qtd > 1) {
+        remover(p);
+        printf("%d\n", qtd);
+        return printf("Removeu\n");
+      }
+    }
   }
   return 0; // passou por toda a pilha e nao encontrou o valor
 }
-void gerarPilha(Celula *pilharand, int n) {
+int gerarPilha(Celula *pilharand, int n) {
   srand(time(NULL));
   int i;
-  n = 100;
   for (i = 0; n >= i; i++) {
     pilharand = inserir(rand() % 100, pilharand);
   }
-  return exibir(pilharand);
+  return 0;
 }
 
 int main() {
   Celula *pilha1 = NULL; // pilha1 é um ponteiro de Celula que vai apontar
 
-  // pilha1 = inserir(12, pilha1);
-  // pilha1 = inserir(10, pilha1);
-  // pilha1 = inserir(5, pilha1);
-  // pilha1 = inserir(25, pilha1);
-  // pilha1 = inserir(100, pilha1);
-  // // o ultimo elemento inserido
-  // pilha1 = remover(pilha1);
+  pilha1 = inserir(12, pilha1);
+  pilha1 = inserir(12, pilha1);
+  pilha1 = inserir(12, pilha1);
+  pilha1 = inserir(25, pilha1);
+  pilha1 = inserir(100, pilha1);
 
-  // printf("Endereco do ultimo elemento: %p\n", pilha1);
-  // printf("Valor do ultimo elemenbto  : %d\n", pilha1->dado);
-
-  // printf("O tamanho da pilha1 eh: %d\n", contarNos(pilha1));
-  gerarPilha(pilha1, 100);
-  // exibir(pilha1);
+  localizado(12, pilha1);
+  exibir(pilha1);
 
   // printf("O numero 12 esta ou nao na pilha? %d", localizado(12, pilha1));
 
