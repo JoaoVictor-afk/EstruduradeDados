@@ -1,3 +1,4 @@
+#include "util.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,7 +9,7 @@ int main() {
   char nome[200];
 
   printf("nome do arquivo fonte: ");
-  scanf("%s", nome);
+  scanf("%s", &nome);
 
   procurador = fopen(nome, "r");
 
@@ -29,6 +30,10 @@ int main() {
   printf("numero de linhas no documento: %d\n", contalinha);
   vetor = (int *)malloc(sizeof(int) * contalinha);
 
+  fclose(procurador);
+
+  procurador = fopen(nome, "r");
+
   // poupular o vetor
   int i = 0;
 
@@ -37,16 +42,13 @@ int main() {
     vetor[i] = atoi(linha);
     i++;
   } while (!feof(procurador));
-  /// calcular
-  int somar = 0;
-  i = 0;
 
-  do {
-    somar = somar + vetor[i];
-    i++;
-  } while (i < contalinha);
+  fclose(procurador);
 
-  printf("media: %d", (somar / contalinha));
+  // calcular
+  printf("media: %.2f", media(vetor, contalinha));
+  printf("maior: %d", maior(vetor, contalinha));
+  printf("menor: %d", menor(vetor, contalinha));
 
   // exbir
 }
