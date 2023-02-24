@@ -1,4 +1,3 @@
-
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -88,6 +87,7 @@ int gerarPilha(Celula *pilharand, int n) {
   int i;
   for (i = 0; n >= i; i++) {
     pilharand = inserir(rand() % 100, pilharand);
+    return localizado(10, pilharand);
   }
   return 0;
 }
