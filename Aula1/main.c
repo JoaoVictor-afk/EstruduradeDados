@@ -8,7 +8,7 @@ typedef struct no {
   struct no *prox; // ponteiro para o proximo elemento dessa estrutura
 } Celula;
 
-Celula *inserir(int valor, Celula *topo) {
+Celula *push(int valor, Celula *topo) {
   // alocar memoria
   Celula *novo = (Celula *)malloc(sizeof(Celula));
 
@@ -22,7 +22,7 @@ Celula *inserir(int valor, Celula *topo) {
   return novo;
 }
 
-Celula *remover(Celula *topo) {
+Celula *remove(Celula *topo) {
   // testar se pilha vazia
   if (!topo) {
     printf("Pilha vazia. Operacao nao realizada\n");
@@ -42,7 +42,7 @@ Celula *remover(Celula *topo) {
   return topo;
 }
 
-int contarNos(Celula *topo) {
+int count(Celula *topo) {
   int qtd = 0;
   Celula *p;
   for (p = topo; p; p = p->prox) {
@@ -51,7 +51,7 @@ int contarNos(Celula *topo) {
   return qtd;
 }
 
-void exibir(Celula *topo) {
+void show(Celula *topo) {
   if (!topo) {
     printf("Pilha vazia\n");
   }
@@ -61,7 +61,7 @@ void exibir(Celula *topo) {
   }
 }
 
-int localizado(int valor, Celula *topo) {
+int local(int valor, Celula *topo) {
   Celula *p;
   int qtd = 0;
   if (!topo) {
@@ -74,7 +74,7 @@ int localizado(int valor, Celula *topo) {
       printf("%d\t\n", p->dado);
       ++qtd;
       if (qtd > 1) {
-        remover(p);
+        remove(p);
         printf("%d\n", qtd);
         return printf("Removeu\n");
       }
@@ -82,12 +82,12 @@ int localizado(int valor, Celula *topo) {
   }
   return 0; // passou por toda a pilha e nao encontrou o valor
 }
-int gerarPilha(Celula *pilharand, int n) {
+int gePi(Celula *pilharand, int n) {
   srand(time(NULL));
   int i;
   for (i = 0; n >= i; i++) {
-    pilharand = inserir(rand() % 100, pilharand);
-    return localizado(10, pilharand);
+    pilharand = psuh(rand() % 100, pilharand);
+    return local(10, pilharand);
   }
   return 0;
 }
@@ -95,14 +95,14 @@ int gerarPilha(Celula *pilharand, int n) {
 int main() {
   Celula *pilha1 = NULL; // pilha1 é um ponteiro de Celula que vai apontar
 
-  pilha1 = inserir(12, pilha1);
-  pilha1 = inserir(12, pilha1);
-  pilha1 = inserir(12, pilha1);
-  pilha1 = inserir(25, pilha1);
-  pilha1 = inserir(100, pilha1);
+  pilha1 = push(12, pilha1);
+  pilha1 = push(12, pilha1);
+  pilha1 = push(12, pilha1);
+  pilha1 = push(25, pilha1);
+  pilha1 = push(100, pilha1);
 
-  localizado(12, pilha1);
-  exibir(pilha1);
+  local(12, pilha1);
+  show(pilha1);
 
   // printf("O numero 12 esta ou nao na pilha? %d", localizado(12, pilha1));
 
