@@ -28,6 +28,7 @@ void Cadastrar() {
   printf("Valor Hora: ");
   scanf("%s", hora);
 
+  fprintf(procurador, "%d@", glicemico);
   fprintf(procurador, "%d@%s@%s@", glicemico, data, hora);
   fclose(procurador);
 }

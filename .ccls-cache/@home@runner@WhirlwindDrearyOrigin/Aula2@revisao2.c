@@ -9,7 +9,7 @@ int main() {
   char nome[200];
 
   printf("nome do arquivo fonte: ");
-  scanf("%s", nome);
+  scanf("%s", &nome);
 
   procurador = fopen(nome, "r");
 
