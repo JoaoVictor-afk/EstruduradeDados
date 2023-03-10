@@ -22,6 +22,26 @@ Celula *push(int valor, Celula *topo) {
   return novo;
 }
 
+Celula *createList(Celula *pilha) {
+
+  FILE *search;
+  char name[200];
+  // alocar memoria
+
+  printf("Caminho e nome do arquivo\n");
+  scanf("%c", &name);
+
+  while (!feof(search)) {
+    fscanf(search, "%d", )
+  }
+
+  // engatar o novo no ultimo
+  novo->prox = topo;
+
+  // retornar o novo top
+  return novo;
+}
+
 Celula *remove(Celula *topo) {
   // testar se pilha vazia
   if (!topo) {
