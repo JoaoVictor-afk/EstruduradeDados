@@ -50,24 +50,18 @@ int localizaPalavraArquivo(char *nomeArquivo, char *palavra) {
   int i;
   char *string_pesquisar = palavra;
   while ((c = fgetc(f)) != EOF) {
-    if (c ==
-        *string_pesquisar) { // Primeiro caracter da STRING que estamos buscando
-                             // foi encontrado, vamos checas os subsequentes:
+    if (c == *string_pesquisar) {
 
-      for (i = 0; i < strlen(string_pesquisar);
-           i++) { // loop para comparar cada caracter da String pesquisada com o
-                  // proximo caracter lido
-        c = fgetc(f); // lê mais um caracter no arquivo
-        if (c == EOF) // se encontrar o final do arquivo sai do loop
+      for (i = 0; i < strlen(string_pesquisar); i++) {
+
+        c = fgetc(f);
+        if (c == EOF)
           break;
-        if (*(string_pesquisar + i) !=
-            c) // se algum caracter subsequente lido for diferente da string
-               // pesquisada sai do loop
+        if (*(string_pesquisar + i) != c)
           break;
       }
 
-        if(i == strlen(string_pesquisar){ //se i == qtd caracteres da String a pesquisar então achamos a string (a verificação não foi interrompida durante as comparações de caracteres)
-        // Aqui entra o seu código ao achar a STRING que você procurava
+        if(i == strlen(string_pesquisar){
         return printf("palavra %d localizada no arquivo", palavra);
 
         break; // break para parar de ler o arquivo
