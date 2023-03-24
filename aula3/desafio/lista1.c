@@ -77,13 +77,18 @@ Celula *popularquivo(Celula *lista) {
   int i;
   int contalinha = 0;
   char linha[250];
+  int media;
 
   do {
     fgets(linha, contalinha, procurador);
     vetor[i] = atoi(linha);
+    media = media + vetor[i];
     lista = inserir(vetor[i], lista);
     i++;
   } while (!feof(procurador));
+
+  printf("%d ", media);
+  printf("%d ", media);
 
   return lista;
 }
@@ -118,11 +123,27 @@ Celula *excluir(int valor, Celula *lista) {
   return lista;
 }
 
+Celula *excluirrepetidos(int valor, Celula *lista) {
+  Celula *p, *pR;
+
+  for (pR = NULL, p = lista; p;) {
+    if (valor == p->conteudo) {
+      printf("Valor localizado e será removido\n");
+      p = excluir(valor, p);
+    } else {
+      pR = p;
+      p = p->prox;
+    }
+  }
+
+  return lista;
+}
+
 int main() {
   Celula *lista = NULL;
 
   lista = popularquivo(lista);
-  
+
   exibir(lista);
 
   return 1;
