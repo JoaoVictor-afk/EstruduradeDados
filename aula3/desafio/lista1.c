@@ -124,12 +124,15 @@ Celula *excluir(int valor, Celula *lista) {
 }
 
 Celula *excluirrepetidos(int valor, Celula *lista) {
-  Celula *p, *pR;
+  Celula *p, *pR, *backup;
 
   for (pR = NULL, p = lista; p;) {
     if (valor == p->conteudo) {
       printf("Valor localizado e será removido\n");
-      p = excluir(valor, p);
+      backup = p->prox;
+      lista = excluir(valor, p);
+      p = backup;
+
     } else {
       pR = p;
       p = p->prox;
@@ -137,6 +140,50 @@ Celula *excluirrepetidos(int valor, Celula *lista) {
   }
 
   return lista;
+}
+
+Celula *excluirrepetidosDinamico(int valor, Celula *lista) {
+  Celula *p, *pR;
+  int i = 0;
+
+  for (pR = NULL, p = lista; p; pR = p, p = p->prox) {
+    if (valor == p->conteudo) {
+      i++;
+    }
+  }
+  for (int j = 0; j < i; j++) {
+    lista = excluir(valor, lista);
+  }
+  return lista;
+}
+Celula *destruirlista(Celula *lista) {
+  Celula *pR, *p;
+
+  if (!lista) {
+    return lista;
+  }
+
+  for (pR = lista, p = lista->prox; p; pR = p, p = p->prox) {
+    free(pR);
+  }
+  free(pR);
+}
+
+Celula *unificar(Celula *lista, Celula *lista1) {
+  Celula *pR, *p;
+  Celula *novo;
+
+  if (!lista) {
+    return lista;
+  }
+
+  if (!pR) {
+    lista = lista->prox;
+  } else if (!p->prox) {
+    pR->prox = NULL;
+  } else {
+    pR->prox = p->prox;
+  }
 }
 
 int main() {
