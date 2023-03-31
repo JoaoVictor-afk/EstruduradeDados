@@ -55,16 +55,46 @@ Celula *inserir(int valor, Celula *lista) {
   return lista;
 }
 
+Celula *excluir(int valor, Celula *lista) {
+  Celula *p, *pR;
+
+  if (!lista) {
+    return lista;
+  }
+
+  for (pR = NULL, p = lista; p; pR = p, p = p->prox) {
+    if (valor == p->conteudo) {
+      printf("Valor localizado e será removido\n");
+      break;
+    }
+  }
+
+  if (!p) {
+    printf("Valor não localizado\n");
+    return lista;
+  }
+
+  if (!pR) {
+    lista = lista->prox;
+  } else if (!p->prox) {
+    pR->prox = NULL;
+  } else {
+    pR->prox = p->prox;
+  }
+  free(p);
+  return lista;
+}
+
 Celula *localizar(int valor, Celula *lista) {
   Celula *p;
   if (lista) {
     for (p = lista; p; p = p->prox) {
       if (valor == p->conteudo) {
-        return p; // achou o valor
+        return 1;
       }
     }
   }
-  return NULL; // valor não localizado
+  return NULL;
 }
 
 void exibir(Celula *lista) {
@@ -107,18 +137,31 @@ Celula *fusaoSemRep(Celula *lista, Celula *lista2) {
   Celula *p;
 
   for (p = lista; p; p = p->prox) {
-    if (!localizar(p->conteudo, lista)) {
+    if (localizar(p->conteudo, Newlista) == NULL) {
       Newlista = inserir(p->conteudo, Newlista);
     }
   }
 
   for (p = lista2; p; p = p->prox) {
-    if (!localizar(p->conteudo, lista2)) {
+    if (localizar(p->conteudo, Newlista) == NULL) {
       Newlista = inserir(p->conteudo, Newlista);
     }
   }
 
   return Newlista;
+}
+
+Celula *poda(Celula *lista) {
+  if (!lista)
+    return lista;
+  lista = excluir(lista->conteudo, lista);
+  Celula *p;
+  if (!lista)
+    return lista;
+  for (p = lista; p->prox; p = p->prox)
+    ;
+  lista = excluir(p->conteudo, lista);
+  return lista;
 }
 
 int main() {
@@ -129,7 +172,7 @@ int main() {
   lista = popularListaAleatoria(lista, 10);
   lista2 = popularListaAleatoria(lista2, 20);
 
-  exibir(lista1);
+  exibir(lista);
   exibir(lista2);
 
   // concatenar a lista1 com a lista2 -> ultimo elemento da lista1 deve apontar
