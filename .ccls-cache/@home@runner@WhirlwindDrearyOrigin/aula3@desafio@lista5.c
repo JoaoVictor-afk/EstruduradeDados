@@ -38,6 +38,51 @@ Celula *inserir(int valor, Celula *lista) {
   }
 
   for (pR = NULL, p = lista; p; pR = p, p = p->prox) {
+    if (valor == p->conteudo) {
+      free(novo);
+      break;
+    }
+  }
+
+  for (pR = NULL, p = lista; p; pR = p, p = p->prox) {
+    if (valor < p->conteudo) {
+      break;
+    }
+  }
+
+  if (!pR) {
+    novo->prox = p;
+    return novo;
+  } else if (!p) {
+    pR->prox = novo;
+  } else {
+    pR->prox = novo;
+    novo->prox = p;
+  }
+  return lista;
+}
+
+Celula *inserirDuplicado(int valor, Celula *lista) {
+  Celula *novo;
+  Celula *p, *pR;
+
+  novo = (Celula *)malloc(sizeof(Celula));
+
+  novo->conteudo = valor;
+  novo->prox = NULL;
+
+  if (!lista) {
+    return novo;
+  }
+
+  for (pR = NULL, p = lista; p; pR = p, p = p->prox) {
+    if (valor == p->conteudo) {
+      free(novo);
+      return lista;
+    }
+  }
+
+  for (pR = NULL, p = lista; p; pR = p, p = p->prox) {
     if (valor < p->conteudo) {
       break;
     }
@@ -116,7 +161,7 @@ Celula *popularListaAleatoria(Celula *lista, int qtd) {
   }
   return lista;
 }
-
+Celula *concatenar() {}
 Celula *fusao(Celula *lista, Celula *lista2) {
   Celula *Newlista = NULL;
   Celula *p;
@@ -137,15 +182,13 @@ Celula *fusaoSemRep(Celula *lista, Celula *lista2) {
   Celula *p;
 
   for (p = lista; p; p = p->prox) {
-    if (localizar(p->conteudo, Newlista) == NULL) {
-      Newlista = inserir(p->conteudo, Newlista);
-    }
+
+    Newlista = inserirDuplicado(p->conteudo, Newlista);
   }
 
   for (p = lista2; p; p = p->prox) {
-    if (localizar(p->conteudo, Newlista) == NULL) {
-      Newlista = inserir(p->conteudo, Newlista);
-    }
+
+    Newlista = inserirDuplicado(p->conteudo, Newlista);
   }
 
   return Newlista;
