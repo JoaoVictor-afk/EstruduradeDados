@@ -161,7 +161,6 @@ Celula *popularListaAleatoria(Celula *lista, int qtd) {
   }
   return lista;
 }
-Celula *concatenar() {}
 Celula *fusao(Celula *lista, Celula *lista2) {
   Celula *Newlista = NULL;
   Celula *p;
