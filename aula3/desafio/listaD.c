@@ -42,33 +42,31 @@ int contar(CelulaD *lista) {
 }
 
 CelulaD *inserir(int valor, CelulaD *lista) {
-	CelulaD *novo; //para alocar nova CelulaD 
+	CelulaD *novo; 
     CelulaD *pR, *p;
 
-	//alocar memoria
 	novo = (CelulaD *)malloc(sizeof(CelulaD));
 	
-    //depositar valor
+  
 	novo->conteudo = valor;
-    novo->prox = NULL; //nao sabemos onde o novo será inserido
+    novo->prox = NULL; 
     novo->ant = NULL;
 
     if (!lista) {
         return novo;
     }
 
-    for ( ; lista->ant ; lista = lista->ant); //garante que o controle da lista dupla esteja no início
+    for ( ; lista->ant ; lista = lista->ant);
 
-    //percorrer a lista a procura da posicao correta
+
     for (pR = NULL, p = lista; p ; pR = p, p = p->prox) {
         if (valor < p->conteudo) {
             //achamos a posicao
             break;
         }
     }
-    //numero inserido como primeiro
-    if (!pR) { // p == lista
-        novo->prox = p; //ou novo->prox = lista;
+    if (!pR) { 
+        novo->prox = p;
         p->ant = novo;
         return novo;
     } else if (p == NULL) {//numero inserido na ultima posicao
@@ -103,16 +101,16 @@ CelulaD *excluir(int valor, CelulaD *lista) {
         printf("Valor não localizado\n");
         return lista;
     }
-    //valor é o primeiro elemento
-    if (!pR) { // if (p == lista)
-        //código para remover o primeiro elemento
+  
+    if (!pR) { 
+        //codigo para remover o primeiro elemento
         lista = lista->prox;
         lista->ant = NULL;
     } else if (!p->prox) {
-        //código para remover o último elemento
+        //codigo para remover o último elemento
         pR->prox = NULL;
     } else {
-        //código para remover o elemento que estiver no meio da lista
+        //codigo para remover o elemento que estiver no meio da lista
         pR->prox = p->prox;
         p->prox->ant = pR;
     }
