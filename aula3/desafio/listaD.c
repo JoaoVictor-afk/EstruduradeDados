@@ -44,11 +44,11 @@ int contar(CelulaD *lista) {
 CelulaD *inserir(int valor, CelulaD *lista) {
 	CelulaD *novo; 
     CelulaD *pR, *p;
-
-	novo = (CelulaD *)malloc(sizeof(CelulaD));
+	
+    novo = (CelulaD *)malloc(sizeof(CelulaD));
 	
   
-	novo->conteudo = valor;
+    novo->conteudo = valor;
     novo->prox = NULL; 
     novo->ant = NULL;
 
@@ -61,7 +61,7 @@ CelulaD *inserir(int valor, CelulaD *lista) {
 
     for (pR = NULL, p = lista; p ; pR = p, p = p->prox) {
         if (valor < p->conteudo) {
-            //achamos a posicao
+           
             break;
         }
     }
@@ -69,26 +69,26 @@ CelulaD *inserir(int valor, CelulaD *lista) {
         novo->prox = p;
         p->ant = novo;
         return novo;
-    } else if (p == NULL) {//numero inserido na ultima posicao
+    } else if (p == NULL) {
         pR->prox = novo;
         novo->ant = pR;
-    } else {//numero inserido no meio
+    } else {
         pR->prox = novo;
         novo->ant = pR;
         novo->prox = p;
         p->ant = novo;
     }	
-	return lista; //retornamos o primeiro elemento
+	return lista; 
 }
 
 CelulaD *excluir(int valor, CelulaD *lista) {
     CelulaD *p, *pR;
 
     if (!lista) {
-        return lista; //return NULL;
+        return lista; 
     }
 
-    for ( ; lista->ant ; lista = lista->ant); //garante que o controle da lista dupla esteja no início
+    for ( ; lista->ant ; lista = lista->ant); 
 
     for (pR = NULL, p = lista; p ; pR = p, p = p->prox) {
         if (valor == p->conteudo) {
@@ -103,14 +103,12 @@ CelulaD *excluir(int valor, CelulaD *lista) {
     }
   
     if (!pR) { 
-        //codigo para remover o primeiro elemento
+       
         lista = lista->prox;
         lista->ant = NULL;
     } else if (!p->prox) {
-        //codigo para remover o último elemento
         pR->prox = NULL;
     } else {
-        //codigo para remover o elemento que estiver no meio da lista
         pR->prox = p->prox;
         p->prox->ant = pR;
     }
